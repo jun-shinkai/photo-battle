@@ -3,7 +3,7 @@
     <span><%= image_tag 'arrow_top.png' %></span>
     <ul class="more_list">
       <li>
-        <%= link_to '詳細', photo_path(tweet.id), method: :get %>
+        <%= link_to '詳細', photo_path(photo.id), method: :get %>
       </li>
       <% if user_signed_in? && current_user.id == photo.user_id %>
         <li>
@@ -18,7 +18,7 @@
   <p><%= photo.info %></p>
   <span class="name">
     <a href="/users/<%= photo.user.id %>">
-      <span>投稿者</span><%= photo.user.nickname %>
+      <span>投稿者</span><%= photo.user.name %>
     </a>
   </span>
 </div>
