@@ -10,6 +10,7 @@ class PhotosController < ApplicationController
   end
   def create
    Photo.create(photo_params)
+   binding.pry
   end
 
   def destroy
@@ -33,13 +34,11 @@ class PhotosController < ApplicationController
   def search
     @photos = Photo.search(params[:keyword])
   end
-
-
   
   private
 
   def photo_params
-    params.require(:photo).permit(:image,:info).merge(user_id: current_user.id)
+    params.require(:photo).permit(:image,:info, :tag_list).merge(user_id: current_user.id)
   end
 
   def set_tweet
@@ -51,4 +50,5 @@ class PhotosController < ApplicationController
       redirect_to action: :index
     end
   end
+
 end
