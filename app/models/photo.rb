@@ -1,7 +1,9 @@
 class Photo < ApplicationRecord
   validates :info, presence: true
-  belongs_to :user
-  has_many :comments
+  belongs_to :user,optional: true
+  has_many :likes, foreign_key: "photo_id", dependent: :destroy
+  has_many :comments, foreign_key: "photo_id", dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
   has_one_attached :image
   acts_as_taggable
   acts_as_taggable_on :skills, :interests

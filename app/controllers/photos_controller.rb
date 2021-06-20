@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_tweet, only: [:edit, :show]
   before_action :move_to_index, except: [:index, :show, :search]
   def index
@@ -9,9 +10,10 @@ class PhotosController < ApplicationController
     @photo = Photo.new
   end
   def create
-   Photo.create(photo_params)
-   binding.pry
+    @photo = Photo.create(photo_params)
+
   end
+  
 
   def destroy
     photo = Photo.find(params[:id])
@@ -29,6 +31,7 @@ class PhotosController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @photo.comments.includes(:user)
+    @like = Like.new
   end
 
   def search

@@ -1,3 +1,4 @@
+<%# app/views/photos/index.html.erb %>
 <%= form_with(url: search_photos_path, local: true, method: :get, class: "search-form") do |form| %>
   <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" %>
   <%= form.submit "検索", class: "search-btn" %>
@@ -9,6 +10,11 @@
   <%# if Time.current.all_month  %>
   <%= photo.created_at.strftime('%Y/%m/%d') %>
    <%=  " --- tag : #{photo.tag_list}---"%>
+   <tbody>
+   <tr>
+     <%= render partial:'likes/like', locals: {photo: photo} %>
+     </tr>
+  </tbody>
     <div class="content_post" style="background-image: url(<%= photo.image %>);">
       <div class="more">
         <span><%= image_tag 'arrow_top.png' %></span>
