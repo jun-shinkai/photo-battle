@@ -54,5 +54,10 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 gem 'devise'
 gem 'pry-rails'
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+gem 'acts-as-taggable-on', '~> 6.0'
+gem 'font-awesome-sass'

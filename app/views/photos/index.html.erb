@@ -1,10 +1,45 @@
+<%# app/views/photos/index.html.erb %>
+<%= form_with(url: search_photos_path, local: true, method: :get, class: "search-form") do |form| %>
+  <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" %>
+  <%= form.submit "検索", class: "search-btn" %>
+<% end %>
+
 <div class="contents row">
+
   <% @photos.each do |photo| %>
-    <div class="content_post" style="background-image: url(<%= tweet.image %>);">
-      <p><%= photo.image %></p>
+  <%# if Time.current.all_month  %>
+  <%= photo.created_at.strftime('%Y/%m/%d') %>
+   <%=  " --- tag : #{photo.tag_list}---"%>
+   <tbody>
+   <tr>
+     <%= render partial:'likes/like', locals: {photo: photo} %>
+     </tr>
+  </tbody>
+    <div class="content_post" style="background-image: url(<%= photo.image %>);">
+      <div class="more">
+        <span><%= image_tag 'arrow_top.png' %></span>
+        <ul class="more_list">
+          <li>
+            <%= link_to '詳細', photo_path(photo.id), method: :get %>
+          </li>
+           <% if user_signed_in? && current_user.id == photo.user_id %>
+          <li>
+            <%= link_to '編集', edit_photo_path(photo.id), method: :get %>
+          </li>
+          <li>
+            <%= link_to '削除', photo_path(photo.id), method: :delete %>
+          </li>
+           <% end %>
+        </ul>
+      </div>
+      <p><%= photo.info %></p>
       <span class="name">
-        <%= photo.name %>
+       <a href="">
+          <span>投稿者</span><%= photo.user.name %>
+        </a>
       </span>
     </div>
+  <%# end %> 
   <% end %>
+   
 </div>
