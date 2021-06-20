@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
   before_action :set_tweet, only: [:edit, :show]
   before_action :move_to_index, except: [:index, :show, :search]
   def index
-    @photos = Photo.includes(:user).order("created_at DESC")
+    @photos = Photo.includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
   end
 
   def new
