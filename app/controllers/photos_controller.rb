@@ -10,6 +10,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new
   end
   def create
+    binding.pry
     @photo = Photo.create(photo_params)
 
   end
@@ -41,7 +42,7 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:image,:info, :tag_list).merge(user_id: current_user.id)
+    params.require(:photo).permit(:title_image,:info, :tag_list).merge(user_id: current_user.id)
   end
 
   def set_tweet
