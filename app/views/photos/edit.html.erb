@@ -4,11 +4,6 @@
 
      
   </div>
-    <%= form_with(model: @photo, local: true) do |form| %>
-    
-      <%= form.text_area :info, placeholder: "text", rows: "10" %>  
-       <%= form.file_field :image %>
-      <%= form.submit "SEND" %>
-    <% end %>
+     <%= render 'form', photo: @photo %>
   
 </div>

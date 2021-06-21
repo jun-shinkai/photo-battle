@@ -1,7 +1,7 @@
 <div class="contents row">
   <p><%= @name %>さんの投稿一覧</p>
   <% @photos.each do |photo| %>
-    <div class="content_post" style="background-image: url(<%= photo.image %>);">
+    <div class="content_post" style="background-image: url(<%= photo.title_image %>);">
       <p><%= photo.info %></p>
     </div>
 

@@ -4,16 +4,6 @@
 
      
   </div>
-    <%= form_with(model: @photo, local: true) do |f| %>
-    
-      <%= f.text_area :info, placeholder: "text", rows: "10" %>  
-       <%= f.file_field :image %>
-  <div class="form-group">
-    <%= f.label :photo, :tag_list %>
-    <%= f.text_field :tag_list, value: @photo.tag_list.join(','), class: "form-control" %>
-  </div>
-  <div class="pull-right">
-    <%= f.submit '登録する', class: "btn btn-info" %>
-  </div>
-<% end %>
+    <%= render 'form', photo: @photo %>
 </div>
+

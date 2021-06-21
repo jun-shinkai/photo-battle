@@ -1,0 +1,33 @@
+ 
+ <%= form_with(model: photo, local: true) do |f| %>
+      <%= f.text_area :info, placeholder: "text", rows: "10" %>  
+      <%# 商品画像 %>
+    <div class="img-upload">
+       <div class="weight-bold-text">
+           商品画像
+          <span class="indispensable">必須</span>
+      </div>
+        <div class="click-upload">
+            <p>
+           </p>
+           <%= f.label :title_image %>
+           <%= f.file_field :title_image, id:"item-image" %>
+         <div id="image-preview">
+           // アップロードした画像があれば表示する
+            <% if photo.title_image.attached? %>
+             <%= image_tag photo.title_image %>
+            <% end %>
+       </div>
+        
+        </div>
+    </div>
+      
+
+     <div class="form-group">
+       <%= f.label :photo, :tag_list %>
+       <%= f.text_field :tag_list, value: @photo.tag_list.join(','), class: "form-control" %>
+    </div>
+    <div class="pull-right">
+           <%= f.submit '登録する', class: "btn btn-info" %>
+   </div>
+  <% end %>>
