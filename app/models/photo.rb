@@ -14,6 +14,7 @@ belongs_to :user,optional: true
   belongs_to_active_hash :sales_status
   belongs_to_active_hash :category
 
+  VALID_PRICEL_HALF = /\A[0-9]+\z/
   with_options presence: true do
     with_options numericality: { other_than: 0 } do
       validates :category_id
