@@ -1,20 +1,21 @@
 <%# app/views/photos/_like.html.erb %>
-<td><%= photo.info %></td>
+<td><%= photo.created_at.strftime('%Y/%m/%d') %></td>
+<td>タイトル: <%= photo.title %></td>
+<td>値段: <%= photo.price%>円</td>
+  <td> <%#=  " --- tag : #{photo.tag_list}---"%></td>
+
 <% if current_user.liked_by?(photo.id) %>
   <td>
     <%= link_to destroy_like_path(photo), class: "like-link", method: :DELETE, remote: true do %>
       <i class="fa fa-heart unlike-btn"></i>
     <% end %>
-    <%= photo.likes.count %>
+    いいね数<%= photo.likes.count %>
   </td>
 <% else %>
   <td>
     <%= link_to create_like_path(photo), class: "like-link", method: :POST, remote: true do %>
       <i class="fa fa-heart like-btn"></i>
     <% end %>
-    <%= photo.likes.count %>
+    いいね数<%= photo.likes.count %>
   </td>
 <% end %>
-<td><%= link_to 'Show', photo %></td>
-<td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-<td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>

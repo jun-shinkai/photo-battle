@@ -8,13 +8,14 @@
 
   <% @photos.each do |photo| %>
   <%# if Time.current.all_month  %>
-  <%= photo.created_at.strftime('%Y/%m/%d') %>
-   <%=  " --- tag : #{photo.tag_list}---"%>
+  <div class="tro">
+  
    <tbody>
    <tr>
      <%= render partial:'likes/like', locals: {photo: photo} %>
      </tr>
   </tbody>
+  <div tro>
     <div class="content_post" style="background-image: url(<%= photo.title_image %>);">
       <div class="more">
         <span><%= image_tag 'arrow_top.png' %></span>
@@ -27,12 +28,12 @@
             <%= link_to '編集', edit_photo_path(photo.id), method: :get %>
           </li>
           <li>
-            <%= link_to '削除', photo_path(photo.id), method: :delete %>
+            <%= link_to '削除', photo_path(photo.id), method: :delete ,data:{ confirm: 'Are you sure?' }%>
           </li>
            <% end %>
         </ul>
       </div>
-      <p><%= photo.info %></p>
+      <p><%= photo.title %></p>
       <span class="name">
        <a href="">
           <span>投稿者</span><%= photo.user.name %>

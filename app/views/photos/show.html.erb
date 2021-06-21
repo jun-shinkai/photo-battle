@@ -13,13 +13,14 @@
       </ul>
     </div>
      <% end %>
-    <p><%= @photo.info %></p>
+    <p><%= @photo.title %></p>
      <span class="name">
       <a href="/users/<%= @photo.user.id %>">
         <span>投稿者</span><%= @photo.user.name %>
       </a>
     </span>
   </div>
+   <p>情報：<%= @photo.info%></p>
    <div class="container">
     <% if user_signed_in? %>
       <%= form_with(model: [@photo, @comment], local: true) do |form| %>

@@ -42,7 +42,7 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:title_image,:info, :tag_list).merge(user_id: current_user.id)
+    params.require(:photo).permit(:title_image,:info, :tag_list,:title,:price).merge(user_id: current_user.id)
   end
 
   def set_tweet
