@@ -18,4 +18,5 @@
     <% end %>
     いいね数<%= photo.likes.count %>
   </td>
+   <%= link_to "購入",photo_orders_path(photo.id), method: :get  ,class:"item-red-btn"%>
 <% end %>

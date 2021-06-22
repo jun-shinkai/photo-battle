@@ -10,9 +10,12 @@ class PhotosController < ApplicationController
     @photo = Photo.new
   end
   def create
-    binding.pry
-    @photo = Photo.create(photo_params)
-
+    @photo = Photo.new(photo_params)
+    if @photo.save
+      redirect_to action: :create
+    else
+      render :new
+    end
   end
   
 
@@ -42,7 +45,8 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:title_image,:info, :tag_list,:title,:price).merge(user_id: current_user.id)
+      params.require(:photo).permit(:category_id,:sales_status_id, :shipping_fee_status_id, :prefecture_id,
+        :scheduled_delivery_id, :name, :info, :price,:title,:tag_list,:title_image).merge(user_id: current_user.id)
   end
 
   def set_tweet
