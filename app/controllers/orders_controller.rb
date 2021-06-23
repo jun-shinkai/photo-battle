@@ -8,8 +8,8 @@ class OrdersController < ApplicationController
   end
 
   def create
-    binding.pry
     @order_address = OrderAddress.new(order_params)
+    binding.pry
     if @order_address.valid?
      pay_photo
       @order_address.save
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   def pay_photo
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 自身のPAY.JPテスト秘密鍵を記述しましょう
     Payjp::Charge.create(
-      amount: photo.params[:price],  # 商品の値段
+      amount: @photo.price,  # 商品の値段
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )

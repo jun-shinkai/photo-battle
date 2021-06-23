@@ -1,43 +1,80 @@
 <div class="contents row">
-  <div class="content_post" style="background-image: url(<%= @photo.title_image %>);">
-   <% if user_signed_in? && current_user.id == @photo.user_id %>
-    <div class="more">
-      <span><%= image_tag 'arrow_top.png' %></span>
-      <ul class="more_list">
-        <li>
-          <%= link_to '編集', edit_photo_path(@photo.id), method: :get %>
-        </li>
-        <li>
-          <%= link_to '削除', photo_path(@photo.id), method: :delete %>
-        </li>
-      </ul>
-    </div>
-     <% end %>
-    <p><%= @photo.title %></p>
+   <div class="content_post" style="background-image: url(<%= @photo.title_image %>);">
+      <% if user_signed_in? && unless @photo.order.present?%>
+        <% if current_user.id == @photo.user_id %>
+           <div class="more">
+               <span><%= image_tag 'arrow_top.png' %></span>
+               <ul class="more_list">
+                  <li>
+                      <%= link_to '編集', edit_photo_path(@photo.id), method: :get %>
+                  </li>
+                  <li>
+                      <%= link_to '削除', photo_path(@photo.id), method: :delete %>
+                  </li>
+            <% else %>
+   
+                    <%= link_to "購入画面に進む",photo_orders_path(@photo.id), method: :get  ,class:"item-red-btn"%>
+
+           <% end %>
+                 </ul>
+     
+       <% end %>
+      <% end %> 
+           </div>
+
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-item">出品者</th>
+          <td class="detail-value"><%= @photo.user.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">カテゴリー</th>
+          <td class="detail-value"><%= @photo.category.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">商品の状態</th>
+          <td class="detail-value"><%= @photo.sales_status.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">配送料の負担</th>
+          <td class="detail-value"><%= @photo.shipping_fee_status.name%></td>
+        </tr>
+        <tr>
+          <th class="detail-item">発送元の地域</th>
+          <td class="detail-value"><%= @photo.prefecture.name%></td>
+        </tr>
+        <tr>
+          <th class="detail-item">発送日の目安</th>
+          <td class="detail-value"><%= @photo.scheduled_delivery.name%></td>
+        </tr>
+      </tbody>
+    </table>
+
      <span class="name">
-      <a href="/users/<%= @photo.user.id %>">
-        <span>投稿者</span><%= @photo.user.name %>
-      </a>
-    </span>
-  </div>
-   <p>情報：<%= @photo.info%></p>
+           <a href="/users/<%= @photo.user.id %>">
+              <span>投稿者</span><%= @photo.user.name %>
+           </a>
+     </span>
+
    <div class="container">
-    <% if user_signed_in? %>
-      <%= form_with(model: [@photo, @comment], local: true) do |form| %>
-        <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
-        <%= form.submit "SEND" %>
-      <% end %>
-    <% else %>
-      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
-    <% end %>
-    <div class="comments">
-      <h4>＜コメント一覧＞</h4>
-      <% @comments.each do |comment| %>
-        <p>
-          <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>：</strong>
-          <%= comment.text %>
-        </p>
-      <% end %>
-    </div>
-  </div>
+        <% if user_signed_in? %>
+             <%= form_with(model: [@photo, @comment], local: true) do |form| %>
+             <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
+             <%= form.submit "SEND" %>
+             <% end %>
+       <% else %>
+             <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+       <% end %>
+       <div class="comments">
+          <h4>＜コメント一覧＞</h4>
+          <% @comments.each do |comment| %>
+         <p>
+            <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>：</strong>
+            <%= comment.text %>
+         </p>
+          <% end %>
+       </div>
+     </div>
+ </div> 
 </div>
