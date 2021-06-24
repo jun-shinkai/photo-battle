@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(order_params)
-    binding.pry
     if @order_address.valid?
      pay_photo
       @order_address.save
@@ -42,7 +41,7 @@ class OrdersController < ApplicationController
   end
 
   def index_action
-    #redirect_to root_path if current_user == @photo.user || @photo.order.present?
+    redirect_to root_path if current_user == @photo.user || @photo.order.present?
   end
 end
 

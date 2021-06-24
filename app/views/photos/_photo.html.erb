@@ -15,6 +15,53 @@
       <% end %>
     </ul>
   </div>
+
+   <li class='list'>
+        <div class='item-img-content'>
+      <% if photo.order.present? %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+          <% end %>
+          
+        </div> 
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= photo.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= photo.price %>円<br><%= photo.shipping_fee_status.name %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+
+
+   <%if photo.length == 0%>
+      <li class='list'>
+        <%= link_to '#' do %>
+        <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            商品を出品してね！
+          </h3>
+          <div class='item-price'>
+            <span>99999999円<br>(税込み)</span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+  
+  
+      <% end %>
   <p><%= photo.title %></p>
   <span class="name">
     <a href="/users/<%= photo.user.id %>">
