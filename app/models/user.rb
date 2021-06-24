@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
 
   has_many :orders
-  has_many :photos       , foreign_key: :user_id, dependent: :destroy
+  has_many :photos   
   has_many :comments     ,foreign_key: :user_id, dependent: :destroy
   has_many :likes,foreign_key: :user_id, dependent: :destroy
   has_many :liked_photos, through: :likes, source: :photo
@@ -15,6 +15,8 @@ class User < ApplicationRecord
   with_options presence: true do
   validates :name 
   validates :birthday
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
   end
 
   def liked_by?(photo_id)
